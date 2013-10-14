@@ -1,0 +1,13 @@
+<% include header.ejs %>
+<div class="container">
+    <legend><i class="icon-tags"></i>Tags</legend>
+    <div class="well well-large">
+        <% tags.forEach(function (tag, index) { %>
+        <% if (tag) { %>
+        <i class="icon-tag"></i>
+        <span class="label label-warning"><a class="btn-link btn-info" href="/tags/<%= tag %>"><%= tag %></a></span>
+        <% } %>
+        <% }) %>
+    </div>
+</div>
+<% include footer.ejs %>

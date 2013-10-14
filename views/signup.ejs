@@ -1,0 +1,24 @@
+<%- include simpleHeader.ejs %>
+<div class="container">
+    <form class="form-signin" method="post" action="/signup">
+        <h2 class="form-signin-heading">Please sign up</h2>
+        <% if(error){ %>
+        <div class="alert alert-error">
+            <%= error%>
+        </div>
+        <% } %>
+        <% if(success){ %>
+        <div class="alert alert-success">
+            <%= success%>
+        </div>
+        <% } %>
+        <input name="name" type="text" class="input-block-level" placeholder="User name">
+        <input name="password" type="password" class="input-block-level" placeholder="Password">
+        <input name="password-repeat" type="password" class="input-block-level" placeholder="Password again">
+        <input name="email" type="text" class="input-block-level" placeholder="Email address">
+
+        <button class="btn btn-large btn-primary" type="submit">Sign up</button>
+    </form>
+
+</div> <!-- /container -->
+<%- include footer %>

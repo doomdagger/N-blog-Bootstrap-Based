@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="jQuery" type="javaScript">
+    <properties>
+      <option name="frameworkName" value="jQuery" />
+      <option name="frameworkVersion" value="1.10.2" />
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/../../../workspace WebStorm/jquery-1.10.2.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../workspace WebStorm/jquery-1.10.2.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

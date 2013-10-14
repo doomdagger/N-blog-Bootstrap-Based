@@ -1,0 +1,32 @@
+<!-- ejs不精通复杂的语法，用最直白的方式来达到你想要的效果 -->
+
+<div class="pagination pagination-centered">
+    <% var nextPage;
+        if(page+1>pageAmount){
+            nextPage = page;
+        }else{
+            nextPage = page+1;
+        }
+
+        var prevPage;
+        if(page-1<1){
+            prevPage = page;
+        }else {
+            prevPage = page - 1;
+        }
+    %>
+    <ul>
+        <li class="active"><a href="/?page=1"><span><i class="icon-fast-backward"></i></span></a></li>
+        <li class="active"><a href="/?page=<%= prevPage%>"><span><i class="icon-backward"></i></span></a></li>
+        <% for(var i = 1; i <= pageAmount; i++) {%>
+            <% if(i == page) { %>
+                <li class="disabled"><a href="/?page=<%= i%>"><%= page%></a></li>
+            <% }else { %>
+                <li class="active"><a href="/?page=<%= i%>"><%= i%></a></li>
+            <% } %>
+        <% } %>
+
+        <li class="active"><a href="/?page=<%= nextPage%>"><span><i class="icon-forward"></i></span></a></li>
+        <li class="active"><a href="/?page=<%= pageAmount%>"><span><i class="icon-fast-forward"></i></span></a></li>
+    </ul>
+</div>

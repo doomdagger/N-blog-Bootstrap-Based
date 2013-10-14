@@ -1,0 +1,31 @@
+<div class="container">
+
+    <% if(post.comments){ for(var i = 0; i < post.comments.length; i++) { %>
+    <div class="well well-large">
+        <% if(post.comments[i].isUser){ %>
+            <h4><a class="btn btn-link btn-large" href="<%=post.comments[i].website%>"><%=post.comments[i].name%></a></h4>
+        <% }else { %>
+            <h4><%=post.comments[i].name%></h4>
+        <% } %>
+        <p class="text-info">Posted on <code><%= post.comments[i].time.minute%></code></p>
+        <p><%- post.comments[i].content%></p>
+    </div>
+    <% }} %>
+
+    <div class="well well-large">
+        <form method="post">
+            <% if (user) { %>
+            <input type="text" name="name" value="<%= user.name %>"   readonly>
+            <input type="text" name="email" value="<%= user.email %>"  readonly/>
+            <input type="hidden" name="website" value="/home/<%= user.name %>"  readonly/>
+            <% } else { %>
+            <input type="text" name="name" class="input-block-level" placeholder="Nick name"/>
+            <input type="text" name="email" class="input-block-level" placeholder="Email address" />
+            <input type="text" name="website" value="http://" class="input-block-level" placeholder="Website Address"/>
+            <% } %>
+            <textarea name="content" class="input-block-level" rows="5" cols="80"></textarea>
+            <button class="btn btn-info" type="submit">Comment</button>
+        </form>
+    </div>
+
+</div>

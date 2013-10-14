@@ -1,0 +1,134 @@
+<% include header.ejs %>
+<div class="container">
+
+    <form method="post" action="/edit/<%=post.name%>/<%=post.time.day%>/<%=post.title%>">
+        <h2>Edit blog</h2>
+        <legend></legend>
+        <% if(error){ %>
+        <div class="alert alert-error">
+            <%= error%>
+        </div>
+        <% } %>
+        <% if(success){ %>
+        <div class="alert alert-success">
+            <%= success%>
+        </div>
+        <% } %>
+
+        <fieldset>
+
+            <label class="text-info">Title</label>
+            <input name="title" type="text" class="input-block-level disabled" value="<%= post.title%>" placeholder="Type your title here">
+            <label class="text-info">Content</label>
+            <textarea name="post" class="input-block-level" rows="20" cols="100" placeholder="Type your content here"><%= post.post%></textarea>
+
+            <a href="#tagModel" role="button" class="btn btn-warning btn-small" data-toggle="modal"><i class="icon-tags"></i></a>
+            <br>
+            <div id="tagOuterRepo" class="well well-small">
+                <% post.tags.forEach(function (tag, index) { %>
+                <% if (tag) { %>
+                <span id="usedTag" class="label label-info"><i class="icon-tag"></i><%= tag%></span>
+                <input type="hidden" name="tags" value="<%= tag%>" >
+                <% } %>
+                <% }) %>
+            </div>
+
+            <button type="submit" class="btn btn-info"><i class="icon-plus"></i>Save Change</button>
+        </fieldset>
+
+    </form>
+
+    <!-- Modal -->
+    <div id="tagModel" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Tag Picker</h3>
+        </div>
+        <div class="modal-body">
+            <div class="span5">
+                <div id="tagRepo" class="span4 well pull-left">
+                    <% tags.forEach(function (tag, index) { %>
+                    <% if (tag) { %>
+                    <a class="btn btn-warning"><i class="icon-tag"></i><%= tag%></a>
+                    <% } %>
+                    <% }) %>
+                </div>
+                <div id="tagContainer" class="span4 well pull-left">
+
+                </div>
+                <div class="form-inline pagination-centered">
+                    <input id="tagField" type="text" class="input-xlarge" placeholder="Type tag here, press enter">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button id="saveTagButton" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Save changes</button>
+        </div>
+    </div>
+
+</div> <!-- /container -->
+<% include footer.ejs %>
+
+<script>
+    var tagsNum = 0;
+    var maxTagsNum = 2;
+
+    function deleteTag(tagId){
+        $('#tagChosen'+tagId).parent($('span')).remove();
+        tagsNum--;
+        if(tagsNum<=maxTagsNum){
+            $('#tagField').removeAttr('readonly');
+        }
+    }
+
+    $('document').ready(function(){
+        var tagField = $('#tagField');
+        var tagContainer = $('#tagContainer');
+        var tagRepo = $('#tagRepo');
+        var saveTagButton = $('#saveTagButton');
+        var tagOuterRepo = $('#tagOuterRepo');
+
+        var tagId = 0;
+
+        tagField.keydown(function(event){
+            if(event.which==13){
+                var tagDom = '<span class="label label-warning"><i class="icon-tag"></i>'+tagField.val()+' <a class="btn-link" onclick="deleteTag('+tagId+')" id="tagChosen'+(tagId++)+'">×</a></span> ';
+                tagContainer.append(tagDom);
+                tagsNum++;
+                if(tagsNum>maxTagsNum){
+                    tagField.attr('readonly','true');
+                }
+                tagField.val('');
+            }
+        });
+
+        tagRepo.children($('a')).click(function(event){
+            if(tagsNum>maxTagsNum){
+                return;
+            }else if(tagsNum>=maxTagsNum){
+                tagField.attr('readonly','true');
+            }
+            tagsNum++;
+            var value = $(this).text();
+            var tagDom = '<span class="label label-warning"><i class="icon-tag"></i>'+value+' <a class="btn-link" onclick="deleteTag('+tagId+')" id="tagChosen'+(tagId++)+'">×</a></span> ';
+            tagContainer.append(tagDom);
+        });
+
+        saveTagButton.click(function(event){
+            tagOuterRepo.children($('#usedTag')).each(function(){
+                $(this).detach();
+            });
+
+            tagContainer.children($('span')).each(function(){
+                var value = $(this).text();
+                value = value.substring(0, value.length-1).trim();
+
+                var tagDom = '<span id="usedTag" class="label label-info"><i class="icon-tag"></i>'+value+'</span>  ';
+                var hiddenDom = '<input type="hidden" name="tags" value="'+value+'" >';
+                tagOuterRepo.append(tagDom);
+                tagOuterRepo.append(hiddenDom);
+            });
+        });
+    });
+</script>

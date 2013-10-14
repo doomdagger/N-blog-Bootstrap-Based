@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Node Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+    <link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="/javascripts/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="/images/favicon.png">
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">N-Blog</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="active"><a href="/">Blog ground</a></li>
+                    <% if(user){ %>
+                    <li><a href="/home/<%= user.name%>">Home</a></li>
+                    <li><a href="/signoff">Sign off</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Action <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/post">Post</a></li>
+                            <li><a href="/upload">Upload</a></li>
+                            <li><a href="/archive">Archive</a></li>
+                            <li><a href="/tags">Tags</a></li>
+                            <li><a href="/signoff">Sign off</a></li>
+                            <li class="divider"></li>
+                            <li class="nav-header">External Linkage</li>
+                            <li><a href="http://www.baidu.com">Baidu</a></li>
+                            <li><a href="http://www.google.com">Google</a></li>
+                        </ul>
+                    </li>
+                    <% }else { %>
+                    <li><a href="/signin">Sign in</a></li>
+                    <li><a href="/signup">Sign up</a></li>
+                    <% } %>
+
+                </ul>
+                <% if(user){ %>
+                    <div class="pull-right">
+                        <button class="btn"><%= user.name%></button>
+                    </div>
+                <% }else { %>
+                <form class="navbar-form pull-right" method="post" action="/signin">
+                    <input name="name" class="span2" type="text" placeholder="User name">
+                    <input name="password" class="span2" type="password" placeholder="Password">
+                    <input name="place" type="hidden" value="nav">
+                    <button type="submit" class="btn">Sign in</button>
+                </form>
+                <% } %>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>

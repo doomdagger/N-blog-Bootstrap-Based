@@ -1,0 +1,44 @@
+<% include header.ejs %>
+<div class="container">
+    <h1 class="text-info"><%='&My Steps&' %></h1>
+    <hr>
+    <table class="table table-striped table-hover">
+
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Time</th>
+            <th>Comments</th>
+            <th>Action</th>
+        </tr>
+        <% for(var i = 0; i < posts.length; i++) { %>
+            <tr>
+                <td><%=i %></td>
+                <td><a class="btn btn-link" href="/home/<%=posts[i].name%>/<%=posts[i].time.day%>/<%=posts[i].title%>"><%= posts[i].title%></a></td>
+                <td><%= posts[i].name%></td>
+                <td><%= posts[i].time.minute%></td>
+                <td>comment(<%= (posts[i].comments)?posts[i].comments.length:0%>)</td>
+                <td>
+                    <a class="btn btn-info btn-small" href="/edit/<%=posts[i].name%>/<%=posts[i].time.day%>/<%=posts[i].title%>"><i class="icon-pencil"></i></a>
+                    <a class="btn btn-warning btn-small" href="#postId<%=i%>" role="button" data-toggle="modal"><i class="icon-trash"></i></a>
+                    <div id="postId<%=i%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h3 id="myModalLabel">Delete Confirmation</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>Press Yes to delete the article <strong>"<%=posts[i].title%>"</strong> utterly.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true" >No</button>
+                            <a class="btn btn-primary"  href="/delete/<%=posts[i].name%>/<%=posts[i].time.day%>/<%=posts[i].title%>">Yes</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        <% } %>
+    </table>
+
+</div>
+<% include footer.ejs %>

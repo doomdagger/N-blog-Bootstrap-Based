@@ -1,0 +1,48 @@
+<!-- User Page, Be careful -->
+<% include header.ejs %>
+<div class="container">
+    <% if(error){ %>
+    <div class="alert alert-error">
+        <%= error%>
+    </div>
+    <% } %>
+    <% if(success){ %>
+    <div class="alert alert-success">
+        <%= success%>
+    </div>
+    <% } %>
+
+
+
+    <!-- Button to trigger modal -->
+    <h2>Upload Picture</h2>
+    <a href="#myModal" role="button" class="btn btn-success" data-toggle="modal">Upload</a>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Uploader</h3>
+        </div>
+        <div class="modal-body">
+            <form method="post" action="/upload" enctype="multipart/form-data">
+                <fieldset>
+                    <input name="fileName" type="text" class="input-block-level" placeholder="rename file to keep away bad names">
+                    <input name="file" type="file">
+                    <button type="submit" class="btn">Execute</button>
+
+                </fieldset>
+            </form>
+        </div>
+        <div class="progress progress-striped active">
+            <div class="bar" style="width: 100%;"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary">Dismiss</button>
+        </div>
+    </div>
+
+
+</div>
+<% include footer.ejs %>

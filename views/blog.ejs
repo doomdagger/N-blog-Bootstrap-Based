@@ -1,0 +1,48 @@
+<% include header.ejs %>
+    <div class="container">
+        <div class="page-header">
+            <div class="pull-right">
+
+                <p class="text-info">Post by <strong><%= post.name%></strong></p>
+                <p class="text-warning">On <strong><%= post.time.minute%></strong></p>
+                <% if(user&&post.name==user.name) {%>
+                <p>
+                    <a class="btn btn-info btn-small" href="/edit/<%=post.name%>/<%=post.time.day%>/<%=post.title%>"><i class="icon-pencil"></i></a>
+                    <a class="btn btn-warning btn-small" href="#postId" role="button" data-toggle="modal"><i class="icon-trash"></i></a>
+                <div id="postId" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="myModalLabel">Delete Confirmation</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>Press Yes to delete the article <strong>"<%=post.title%>"</strong> utterly.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true" >No</button>
+                        <a class="btn btn-primary"  href="/delete/<%=post.name%>/<%=post.time.day%>/<%=post.title%>">Yes</a>
+                    </div>
+                </div>
+                </p>
+                <% }%>
+            </div>
+
+            <h1><%= post.title%></h1>
+            <% post.tags.forEach(function (tag, index) { %>
+            <% if (tag) { %>
+            <span class="label label-warning"><i class="icon-tag"></i><%= tag %></span>
+            <% } %>
+            <% }); %>
+        </div>
+
+        <p class="lead"><%- post.post%></p>
+
+        <p>Back to <a href="/">the blog gournd</a> minus the navbar.</p>
+
+        <div style="height: 60px;"></div>
+        <hr>
+    </div>
+
+
+
+<% include comment.ejs %>
+<% include footer.ejs %>

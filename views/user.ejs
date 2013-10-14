@@ -1,0 +1,24 @@
+<!-- User Page, Be careful -->
+<% include header.ejs %>
+<div class="container">
+    <% if(error){ %>
+    <div class="alert alert-error">
+        <%= error%>
+    </div>
+    <% } %>
+    <% if(success){ %>
+    <div class="alert alert-success">
+        <%= success%>
+    </div>
+    <% } %>
+    <!-- Main hero unit for a primary marketing message or call to action -->
+    <div class="hero-unit">
+        <h1><%= title%></h1>
+        <p>The more I want... The more I miss</p>
+        <p><a href="#" class="btn btn-primary btn-large">Learn more about him/her &raquo;</a></p>
+    </div>
+
+    <% include postList.ejs %>
+
+</div>
+<% include footer.ejs %>
