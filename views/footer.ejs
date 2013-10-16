@@ -11,6 +11,27 @@
 <script src="/javascripts/bootstrap-collapse.js"></script>
 <script src="/javascripts/bootstrap-carousel.js"></script>
 <script src="/javascripts/bootstrap-typeahead.js"></script>
+<script>
 
+    $('document').ready(function(){
+
+        $('#userInfo').popover('toggle');
+        $('#userInfo').popover('hide');
+
+        var searchForm = $('#searchForm');
+        var searchField = $('#searchField');
+
+        searchField.keydown(function(event){
+            if(event.which==13){
+                event.preventDefault();
+                if(!$(this).val()||$(this).val().trim()==''){
+                    $(this).attr('placeHolder', 'Must type some keywords here!!!');
+                } else{
+                    searchForm.submit();
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>

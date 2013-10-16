@@ -28,6 +28,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-57-precomposed.png">
     <link rel="shortcut icon" href="/images/favicon.png">
+
 </head>
 
 <body>
@@ -46,7 +47,7 @@
                     <li class="active"><a href="/">Blog ground</a></li>
                     <% if(user){ %>
                     <li><a href="/home/<%= user.name%>">Home</a></li>
-                    <li><a href="/signoff">Sign off</a></li>
+                    <li><a  id="userInfo" title="" data-content="User name:<%=user.name%>   Email:<%=user.email%>" data-placement="bottom" data-toggle="popover"  data-original-title="Info"><i class="icon-user"></i> <%= user.name%></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Action <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -68,9 +69,11 @@
 
                 </ul>
                 <% if(user){ %>
-                    <div class="pull-right">
-                        <button class="btn"><%= user.name%></button>
-                    </div>
+
+                <form id="searchForm" class="navbar-form pull-right" action="/search" method="get">
+                    <input id="searchField" name="keywords" class="span4" type="text" placeholder="Search Field, type, then press enter">
+                </form>
+
                 <% }else { %>
                 <form class="navbar-form pull-right" method="post" action="/signin">
                     <input name="name" class="span2" type="text" placeholder="User name">
@@ -83,3 +86,4 @@
         </div>
     </div>
 </div>
+

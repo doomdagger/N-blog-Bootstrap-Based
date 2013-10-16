@@ -1,0 +1,28 @@
+<% include header.ejs %>
+<div class="container">
+    <% if(posts){ %>
+    <h1><%=title%></h1>
+    <p class="text-warning">get <%=posts.length%> records</p>
+    <hr>
+    <% posts.forEach(function(post, index){%>
+        <div class="span12 well">
+
+            <legend>
+                <h3 class="text-info"><a class="btn-link" href="/home/<%=post.name%>/<%=post.time.day%>/<%=post.title%>"><%=post.title%></a></h3>
+                <% post.tags.forEach(function (tag, index) { %>
+                <% if (tag) { %>
+                <span class="label label-warning"><i class="icon-tag"></i><%= tag %></span>
+                <% } %>
+                <% }); %>
+                <span class="label label-info"><i class="icon-eye-open"></i>
+                    <%=post.pv%> times
+                </span>
+            </legend>
+            <p><%=post.post.substring(0,100)%>......</p>
+        </div>
+    <% }); %>
+    <% }else { %>
+        <h1><%=title %></h1>
+    <% } %>
+</div>
+<% include footer.ejs %>

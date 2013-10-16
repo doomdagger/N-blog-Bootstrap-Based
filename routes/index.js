@@ -526,8 +526,69 @@ module.exports = function(app){
         });
     });
 
+
+    app.all('/search', function(req,res){
+        var keywords = req.query.keywords;
+
+        if(!keywords){
+            return res.render('search', {
+                title: 'search page',
+                posts: null,
+                user: req.session.user,
+                success: req.flash('success').toString(),
+                error: req.flash('error').toString()
+            });
+        }
+
+        Post.search(keywords, function(err, docs){
+            if(err){
+                req.flash('error', err);
+                return res.redirect('back');
+            }
+
+            res.render('search', {
+                title: 'Keywords: ' + keywords,
+                posts: docs,
+                user: req.session.user,
+                success: req.flash('success').toString(),
+                error: req.flash('error').toString()
+            });
+        });
+
+    });
+
+    app.get('/reprint/:name/:day/:title', beSureLogin);
+    app.get('/reprint/:name/:day/:title', function (req, res) {
+        var name = req.params.name;
+        var day = req.params.day;
+        var title = req.params.title;
+
+        var currentUserName = req.session.user.name,
+            reprint_from = {name: name, day: day, title: title},
+            reprint_to = {name: currentUserName};
+        Post.reprint(reprint_from, reprint_to, function (err, post) {
+            if (err) {
+                req.flash('error', err);
+                return res.redirect('back');
+            }
+            req.flash('success', 'reprint successful!!!');
+            var url = '/home/' + post.name + '/' + post.time.day + '/' + post.title;
+            res.redirect(url);
+        });
+
+    });
+
     app.get('/500', function(req,res){
          res.send('<h1>Code 500</h1>');
+    });
+
+    app.use(function (req, res) {
+        res.render("404",{
+            title: 'Sorry, 404',
+            user: req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString()
+        });
     });
 
     function beSureLogin(req, res, next){

@@ -8,13 +8,19 @@
             <div class="item active">
                 <img src="/images/slide-01.jpg" alt="">
                 <div class="container">
-
+                    <div class="carousel-caption">
+                        <h1>One more for good measure.</h1>
+                        <p class="lead">Happy Here.</p>
+                    </div>
                 </div>
             </div>
             <div class="item">
                 <img src="/images/slide-02.jpg" alt="">
                 <div class="container">
-
+                    <div class="carousel-caption">
+                        <h1>One more for good measure.</h1>
+                        <p class="lead">Happy Here.</p>
+                    </div>
                 </div>
             </div>
             <div class="item">
@@ -31,7 +37,21 @@
         <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
     </div><!-- /.carousel -->
 
-    <% include postList.ejs %>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3 pull-left pagination-centered" style="width : 230px; height: 350px">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a><h3>Blogs</h3></a></li>
+                        <li ><a><h3>Category</h3></a></li>
+                        <li ><a><h3>Tags</h3></a></li>
+                        <li ><a><h3>Setting</h3></a></li>
+                    </ul>
+            </div>
+            <div class="span9 pull-right">
+                <% include postList.ejs %>
+            </div>
+        </div>
+    </div>
 
 
 </div>

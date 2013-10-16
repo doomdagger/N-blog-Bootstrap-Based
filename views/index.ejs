@@ -10,12 +10,18 @@
             <%= success%>
         </div>
         <% } %>
-        <!-- Main hero unit for a primary marketing message or call to action -->
-        <div class="hero-unit">
-            <h1><%= title%></h1>
-            <p>Node Blog is an open-source blog program. Feel free to use it and put forward the problems you've found to me. Thanks</p>
-            <p><a href="http://sunshinelins.duapp.com" class="btn btn-primary btn-large">About Me &raquo;</a></p>
+        <!-- Jumbotron -->
+        <div class="jumbotron">
+            <h1>Blog Ground</h1>
+            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+            <% if(user){ %>
+                <a class="btn btn-large btn-success" href="/post">Post Away</a>
+            <%}else { %>
+                <a class="btn btn-large btn-success" href="/signup">Get started today</a>
+            <% } %>
         </div>
+
+        <hr>
 
         <% include postList.ejs %>
 

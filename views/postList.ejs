@@ -8,6 +8,9 @@
         <span class="label label-warning"><i class="icon-tag"></i><%= tag %></span>
         <% } %>
         <% }); %>
+        <span class="label label-info"><i class="icon-eye-open"></i>
+            <%=posts[i].pv%> times
+        </span>
         <p><%- posts[i].post%></p>
         <p class="text-info">Post by <a class="btn-info" href="/home/<%= posts[i].name%>"><%= posts[i].name%></a></p>
         <p class="text-warning"><%= posts[i].time.minute %></p>
@@ -29,7 +32,7 @@
             </div>
         </div>
         <% } %>
-        <a class="btn btn-small" href="/home/<%=posts[i].name%>/<%=posts[i].time.day%>/<%=posts[i].title%>"><i class="icon-comment"></i></a></p>
+        <a class="btn btn-small" href="/home/<%=posts[i].name%>/<%=posts[i].time.day%>/<%=posts[i].title%>"><i class="icon-comment"></i>(<%=posts[i].comments.length%>)</a></p>
     </div>
     <% if(i+1<posts.length){ %>
     <div class="span4">
@@ -39,6 +42,9 @@
         <span class="label label-warning"><i class="icon-tag"></i><%= tag %></span>
         <% } %>
         <% }); %>
+        <span class="label label-info"><i class="icon-eye-open"></i>
+            <%=posts[i+1].pv%> times
+        </span>
         <p><%- posts[i+1].post%></p>
         <p class="text-info">Post by <a class="btn-info" href="/home/<%= posts[i+1].name%>"><%= posts[i+1].name%></a></p>
         <p class="text-warning"><%= posts[i+1].time.minute %></p>
@@ -60,7 +66,7 @@
             </div>
         </div>
             <% } %>
-            <a class="btn btn-small" href="/home/<%=posts[i+1].name%>/<%=posts[i+1].time.day%>/<%=posts[i+1].title%>"><i class="icon-comment"></i></a></p>
+            <a class="btn btn-small" href="/home/<%=posts[i+1].name%>/<%=posts[i+1].time.day%>/<%=posts[i+1].title%>"><i class="icon-comment"></i>(<%=posts[i+1].comments.length%>)</a></p>
     </div>
     <% } %>
     <% if(i+2<posts.length){ %>
@@ -71,6 +77,9 @@
         <span class="label label-warning"><i class="icon-tag"></i><%= tag %></span>
         <% } %>
         <% }); %>
+        <span class="label label-info"><i class="icon-eye-open"></i>
+            <%=posts[i+2].pv%> times
+        </span>
         <p><%- posts[i+2].post%></p>
         <p class="text-info">Post by <a class="btn-info" href="/home/<%= posts[i+2].name%>"><%= posts[i+2].name%></a></p>
         <p class="text-warning"><%= posts[i+2].time.minute %></p>
@@ -92,7 +101,7 @@
             </div>
         </div>
             <% } %>
-            <a class="btn btn-small" href="/home/<%=posts[i+2].name%>/<%=posts[i+2].time.day%>/<%=posts[i+2].title%>"><i class="icon-comment"></i></a></p>
+            <a class="btn btn-small" href="/home/<%=posts[i+2].name%>/<%=posts[i+2].time.day%>/<%=posts[i+2].title%>"><i class="icon-comment"></i>(<%=posts[i+2].comments.length%>)</a></p>
     </div>
     <% } %>
 </div>

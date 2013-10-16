@@ -1,4 +1,27 @@
 <% include header.ejs %>
+
+<%  var reprintFlag = 0; //0 can reprint, 1 already reprint, 2 do not show reprint
+
+    if(post.name==user.name||!user){
+        reprintFlag = 2;
+    }
+
+    if(post.reprint_info&&post.reprint_info.reprint_from&&reprintFlag!=2){
+        if(post.reprint_info.reprint_from.name==user.name){
+            reprintFlag = 2;
+        }
+    }
+
+
+    if(post.reprint_info&&post.reprint_info.reprint_to){
+        post.reprint_info.reprint_to.forEach(function(info, index){
+            if(info.name==user.name){
+                reprintFlag = 1;
+            }
+        });
+    }
+%>
+
     <div class="container">
         <div class="page-header">
             <div class="pull-right">
@@ -24,6 +47,12 @@
                 </div>
                 </p>
                 <% }%>
+
+                <% if(reprintFlag==0) {%>
+                <a class="btn btn-info btn-small" href="/reprint/<%=post.name%>/<%=post.time.day%>/<%=post.title%>"><i class="icon-share"></i></a>
+                <% }else if(reprintFlag==1){ %>
+                <a data-toggle="tooltip" title="Already Reprint By You"  class="btn btn-info btn-small"  ><i class="icon-share"></i></a>
+                <% } %>
             </div>
 
             <h1><%= post.title%></h1>
@@ -32,6 +61,20 @@
             <span class="label label-warning"><i class="icon-tag"></i><%= tag %></span>
             <% } %>
             <% }); %>
+
+
+            <span class="label label-info"><i class="icon-eye-open"></i>
+                <%=post.pv%> times
+            </span>
+            <% if(post.reprint_info&&post.reprint_info.reprint_to){ %>
+            <span class="label label-info"><i class="icon-share"></i>
+                <%=post.reprint_info.reprint_to.length%> times
+            </span>
+            <% } %>
+            <% if(post.reprint_info&&post.reprint_info.reprint_from){ %>
+            <span class="text-success"><strong>Article is reprinted from <%=post.reprint_info.reprint_from.name%></strong></span>
+            <a class="btn-link btn-success" href="/home/<%=post.reprint_info.reprint_from.name%>/<%=post.reprint_info.reprint_from.day%>/<%=post.reprint_info.reprint_from.title%>">View Source Article</a>
+            <% } %>
         </div>
 
         <p class="lead"><%- post.post%></p>
