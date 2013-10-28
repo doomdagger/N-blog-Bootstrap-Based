@@ -7,6 +7,6 @@ N-blog-Bootstrap-Based
 
 ##Express+EJS+MongoDB
 
-请事先确定MongoDB可连接，连接地址默认为`http://localhost:3000`, `cd`到项目目录后，执行`node app.js`指令，服务器监听`3000`端口。
+请事先确定MongoDB可连接。 `cd`到项目目录后，执行`node app.js`指令，服务器监听`3000`端口,连接地址默认为`http://localhost:3000`,
 
 
